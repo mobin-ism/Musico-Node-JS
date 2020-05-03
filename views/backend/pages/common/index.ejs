@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Metas -->
+    <%- include('../../partials/metas.ejs'); -%>
+        <!-- STYLES -->
+        <%- include('../../partials/styles.ejs'); -%>
+</head>
+
+<body>
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+        <!-- Page content -->
+        <div class="container-fluid mt--6">
+            <!-- INNER PAGE -->
+            <%- include(pageName+'.ejs'); -%>
+                <!-- Footer -->
+                <%- include('../../partials/footer.ejs'); -%>
+        </div>
+    </div>
+    <!-- Argon Scripts -->
+    <%- include('../../partials/scripts.ejs'); -%>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <%- include('./partials/metas.ejs');  -%> 
+    <%- include('./partials/styles.ejs');  -%> 
+</head>
+<body>
+    <!--[if lte IE 9]> <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p> <![endif]-->
+    <%- include('./partials/header.ejs');  -%> 
+    <%if (pageName === 'home') { %>
+        <%- include('./partials/slider.ejs');  -%> 
+    <% } %>
+    <%- include('./pages/'+pageName+'.ejs');  -%> 
+    <%- include('./partials/footer.ejs');  -%> 
+    <%- include('./partials/scripts.ejs');  -%> 
+</body>
