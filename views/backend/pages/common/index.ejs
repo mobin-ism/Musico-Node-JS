@@ -4,21 +4,18 @@
 <head>
     <!-- Metas -->
     <%- include('../../partials/metas.ejs'); -%>
-        <!-- STYLES -->
-        <%- include('../../partials/styles.ejs'); -%>
+    <!-- STYLES -->
+    <%- include('../../partials/styles.ejs'); -%>
 </head>
 
-<body>
+<body class="bg-default">
+    <%- include('./navbar.ejs');  -%>
     <!-- Main content -->
-    <div class="main-content" id="panel">
-        <!-- Page content -->
-        <div class="container-fluid mt--6">
-            <!-- INNER PAGE -->
-            <%- include(pageName+'.ejs'); -%>
-                <!-- Footer -->
-                <%- include('../../partials/footer.ejs'); -%>
-        </div>
+    <div class="main-content">
+        <%- include('./'+pageName+'.ejs'); -%>
     </div>
+    <!-- Footer -->
+    <%- include('./footer.ejs'); -%>
     <!-- Argon Scripts -->
     <%- include('../../partials/scripts.ejs'); -%>
 </body>
