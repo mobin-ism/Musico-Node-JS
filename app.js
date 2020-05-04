@@ -4,13 +4,6 @@ const web = require('./routes/frontend/web');
 const pageNotFound = require('./middlewares/404');
 const server = require('./helpers/server');
 const commonRoute = require('./routes/backend/common');
-const flash = require('express-flash-messages')();
-const session = require('express-session');
-app.use(session({ cookie: { maxAge: 60000 }, 
-                  secret: 'woot',
-                  resave: false, 
-                  saveUninitialized: false}));
-app.use(flash);
 
 app.use(express.static('public'));
 app.use(express.static('media'));
