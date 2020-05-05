@@ -27,16 +27,30 @@
                     <div class="text-center text-muted mb-4">
                         <small>Sign up with credentials</small>
                     </div>
-                    <form role="form" action="register" method="POST">
+                    <% if (Object.keys(validate).length != 0 && validate.response) { %>
+                        <% if(validate.response.isSucceed){ %>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <span class="alert-text"><strong>Congratulations!</strong> <%= validate.response.message %>
+                                !</span>
+                        </div>
+                        <% } else{ %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="alert-text"><strong>Oops!</strong> <%= validate.response.message %> !</span>
+                        </div>
+                        <% } %>
+                    <% } %>
+                    <form role="form" action="registration" method="POST">
                         <div class="form-group">
                             <div class="input-group input-group-merge input-group-alternative mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                 </div>
-                                <input class="form-control" name="name" placeholder="Name" type="text">
+                                <input type="text" class="form-control" name="name" placeholder="Name"
+                                    value="<% if (Object.keys(validate).length != 0 && validate.inputValidation){%><%= validate.inputValidation.value.name; %><% } %>">
                             </div>
-                            <% if (typeof(validate) != 'undefined' && validate.error != null && validate.error.details[0].context.key === 'name') { %>
-                             <small><%= validate.error.details[0].message; %> </small>
+                            <% if (Object.keys(validate).length != 0 && validate.inputValidation && validate.inputValidation.error != null && validate.inputValidation.error.details[0].context.key === 'name') { %>
+                            <small class="text-warning"><%= validate.inputValidation.error.details[0].message; %>
+                            </small>
                             <% } %>
                         </div>
                         <div class="form-group">
@@ -44,34 +58,33 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                 </div>
-                                <input class="form-control" name="email" placeholder="Email" type="email">
+                                <input class="form-control" name="email" placeholder="Email" type="email"
+                                    value="<% if (Object.keys(validate).length != 0 && validate.inputValidation){%><%= validate.inputValidation.value.email; %><% } %>">
                             </div>
+                            <% if (Object.keys(validate).length != 0 && validate.inputValidation && validate.inputValidation.error != null && validate.inputValidation.error.details[0].context.key === 'email') { %>
+                            <small class="text-warning"><%= validate.inputValidation.error.details[0].message; %>
+                            </small>
+                            <% } %>
                         </div>
                         <div class="form-group">
                             <div class="input-group input-group-merge input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control" name="password" placeholder="Password" type="password">
+                                <input class="form-control" name="password" placeholder="Password" type="password"
+                                    value="<% if (Object.keys(validate).length != 0 && validate.inputValidation){%><%= validate.inputValidation.value.password; %><% } %>">
                             </div>
-                        </div>
-                        <div class="text-muted font-italic">
-                            <small>password strength:
-                                <span class="text-success font-weight-700">strong</span>
+                            <% if (Object.keys(validate).length != 0 && validate.inputValidation && validate.inputValidation.error != null && validate.inputValidation.error.details[0].context.key === 'password') { %>
+                            <small class="text-warning"><%= validate.inputValidation.error.details[0].message; %>
                             </small>
-                        </div>
-                        <div class="row my-4">
-                            <div class="col-12">
-                                <div class="custom-control custom-control-alternative custom-checkbox">
-                                    <input class="custom-control-input" id="customCheckRegister" type="checkbox">
-                                    <label class="custom-control-label" for="customCheckRegister">
-                                        <span class="text-muted">I agree with the <a href="#!">Privacy Policy</a></span>
-                                    </label>
-                                </div>
-                            </div>
+                            <% } %>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                        </div>
+
+                        <div class="text-muted text-center">
+                            <a href="/refresh"><small>Refresh Form</small></a>
                         </div>
                     </form>
                 </div>

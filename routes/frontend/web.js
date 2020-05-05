@@ -1,13 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const HomeController = require('../../controllers/frontend/HomeController');
-const homeController = new HomeController();
+const home = require('../../controllers/frontend/Home');
 
-router.get('/', homeController.index);
-router.get('/artists', homeController.artists);
-router.get('/albums', homeController.albums);
-router.get('/about', homeController.about);
-router.get('/login', homeController.login);
-router.get('/registration', homeController.registration);
+router.get('/', home.index);
+router.get('/artists', home.artists);
+router.get('/albums', home.albums);
+router.get('/about', home.about);
 
 module.exports = router;

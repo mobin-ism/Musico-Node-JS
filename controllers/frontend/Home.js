@@ -1,4 +1,4 @@
-class HomeController {
+class Home {
     // FOR RENDERING HOMEPAGE
     index(req, res) {
         res.render('frontend/index', {
@@ -30,22 +30,6 @@ class HomeController {
             pageTitle: "About"
         });
     }
-
-    // FOR RENDERING LOGIN
-    login(req, res) {
-        res.render('backend/pages/common/index', {
-            pageName: "login",
-            pageTitle: "Login"
-        });
-    }
-
-    // FOR RENDERING REGISTRATION
-    registration(req, res) {
-        res.render('backend/pages/common/index', {
-            pageName: "registration",
-            pageTitle: "Registration"
-        });
-    }
 }
 
-module.exports = HomeController;
+module.exports = new Home();

@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const LoginRegistraion = require('../../controllers/backend/LoginController');
-const loginRegistraion = new LoginRegistraion();
+const login = require('../../controllers/backend/Login');
 
-router.post('/register', loginRegistraion.register);
+router.get('/login', login.getLogin);
+router.post('/login', login.postLogin);
+
+router.get('/registration', login.getRegistration);
+router.post('/registration', login.postRegistration);
+
+router.get('/refresh', login.refresh);
 
 module.exports = router;
