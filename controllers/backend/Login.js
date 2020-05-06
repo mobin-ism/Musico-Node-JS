@@ -1,17 +1,19 @@
-const user = require('../../models/user');
+const User = require('../../models/User');
 var validation = {};
 class Login {
 
     // FOR REGISTERING USER
     async postRegistration(req, res) {
-        const inputValidationResult = user.validateOnRegistration(req.body);
+        const userModel = new User(req, res);
+        const inputValidationResult = userModel.validateOnRegistration(req.body);
 
         if (inputValidationResult.error != null) {
             validation.inputValidation = inputValidationResult;
             validation.response = null;
             res.redirect('/registration');
         } else {
-            const result = await user.add(req.body);
+            console.log("Route Handler: ", req.body);
+            const result = await userModel.addUser(req.body);
             validation.response = result;
             validation.inputValidation = null;
             res.redirect('/registration');
