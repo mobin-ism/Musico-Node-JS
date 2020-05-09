@@ -4,7 +4,7 @@
       <!-- Brand -->
       <div class="sidenav-header d-flex align-items-center">
         <a class="navbar-brand" href="../../pages/dashboards/dashboard.html">
-          <img src="/backend/img/brand/blue.png" class="navbar-brand-img" alt="...">
+          <img src="backend/img/brand/blue.png" class="navbar-brand-img" alt="...">
         </a>
         <div class="ml-auto">
           <!-- Sidenav toggler -->
@@ -23,51 +23,37 @@
           <!-- Nav items -->
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "dashboard") { %>active<% } %>" href="/dashboard">
+              <a class="nav-link active" href="/dashboard">
                 <i class="ni ni-shop text-primary"></i>
                 <span class="nav-link-text">Dashboard</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "artist") { %>active<% } %>" href="/artist">
+              <a class="nav-link" href="/artist">
                 <i class="ni ni-ungroup text-orange"></i>
                 <span class="nav-link-text">Artist</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "album") { %>active<% } %>" href="/album">
+              <a class="nav-link" href="/album">
                 <i class="ni ni-ui-04 text-info"></i>
                 <span class="nav-link-text">Album</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "track") { %>active<% } %>" href="/track">
+              <a class="nav-link" href="/track">
                 <i class="ni ni-single-copy-04 text-pink"></i>
                 <span class="nav-link-text">Track</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "user") { %>active<% } %>" href="/user">
-                <i class="ni ni-align-left-2 text-default"></i>
-                <span class="nav-link-text">User</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link <% if (pageName === "gallery") { %>active<% } %>" href="/gallery">
+              <a class="nav-link" href="/gallery">
                 <i class="ni ni-map-big text-primary"></i>
                 <span class="nav-link-text">Gallery</span>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a class="nav-link <% if (pageName === "settings") { %>active<% } %>" href="/settings">
-                <i class="ni ni-calendar-grid-58 text-red"></i>
-                <span class="nav-link-text">Settings</span>
               </a>
             </li>
           </ul>

@@ -4,25 +4,22 @@
 <head>
     <!-- Metas -->
     <%- include('./partials/metas.ejs'); -%>
-        <!-- STYLES -->
-        <%- include('./partials/styles.ejs'); -%>
+    <!-- STYLES -->
+    <%- include('./partials/styles.ejs'); -%>
 </head>
 
 <body>
     <!-- Sidenav -->
-    <%- include('./pages/admin/navigation.ejs'); -%>
-        <!-- Main content -->
-        <div class="main-content" id="panel">
-            <!-- Page content -->
-            <div class="container-fluid mt--6">
-                <!-- INNER PAGE -->
-                <%- include('./pages/'+pageName+'.ejs'); -%>
-                    <!-- Footer -->
-                    <%- include('./partials/footer.ejs'); -%>
-            </div>
-        </div>
-        <!-- Argon Scripts -->
-        <%- include('./partials/scripts.ejs'); -%>
+    <%- include('./pages/'+userType+'/navigation.ejs'); -%>
+    <!-- Main content -->
+    <div class="main-content" id="panel">
+        <!-- Top nav -->
+        <%- include('./partials/navbar.ejs'); -%>
+        <!-- Page content -->
+        <%- include('./pages/'+userType+'/'+pageName+'.ejs'); -%>
+    </div>
+    <!-- Argon Scripts -->
+    <%- include('./partials/scripts.ejs'); -%>
 </body>
 
 </html>

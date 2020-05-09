@@ -27,17 +27,20 @@
                     <div class="text-center text-muted mb-4">
                         <small>Sign up with credentials</small>
                     </div>
-                    <% if (Object.keys(validate).length != 0 && validate.response) { %>
-                        <% if(validate.response.isSucceed){ %>
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <span class="alert-text"><strong>Congratulations!</strong> <%= validate.response.message %>
-                                !</span>
-                        </div>
-                        <% } else{ %>
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <span class="alert-text"><strong>Oops!</strong> <%= validate.response.message %> !</span>
-                        </div>
-                        <% } %>
+                    
+                    <% if (validate && validate.type === "basic") { %>
+                    <% if(!validate.isError){ %>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span class="alert-text">
+                            <strong>Congratulations!</strong>
+                            <%= validate.message %>
+                            !</span>
+                    </div>
+                    <% } else{ %>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span class="alert-text"><strong>Oops!</strong> <%= validate.message %> !</span>
+                    </div>
+                    <% } %>
                     <% } %>
                     <form role="form" action="registration" method="POST">
                         <div class="form-group">
@@ -46,38 +49,30 @@
                                     <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
                                 </div>
                                 <input type="text" class="form-control" name="name" placeholder="Name"
-                                    value="<% if (Object.keys(validate).length != 0 && validate.inputValidation){%><%= validate.inputValidation.value.name; %><% } %>">
-                            </div>
-                            <% if (Object.keys(validate).length != 0 && validate.inputValidation && validate.inputValidation.error != null && validate.inputValidation.error.details[0].context.key === 'name') { %>
-                            <small class="text-warning"><%= validate.inputValidation.error.details[0].message; %>
-                            </small>
-                            <% } %>
+                                    value="<% if (validate && validate.type === "input") { %><%= validate.value.name %><% } %>">
+                            </div>   
+                            <small class="text-warning"><% if (validate && validate.type === "input" && validate.key === "name") { %><%= validate.message %> <% } %></small>                          
                         </div>
+                        
                         <div class="form-group">
                             <div class="input-group input-group-merge input-group-alternative mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                 </div>
-                                <input class="form-control" name="email" placeholder="Email" type="email"
-                                    value="<% if (Object.keys(validate).length != 0 && validate.inputValidation){%><%= validate.inputValidation.value.email; %><% } %>">
+                                <input type="email" class="form-control" name="email" placeholder="Email"
+                                    value="<% if (validate && validate.type === "input" && validate.key === "email") { %><%= validate.value.email %><% } %>">
                             </div>
-                            <% if (Object.keys(validate).length != 0 && validate.inputValidation && validate.inputValidation.error != null && validate.inputValidation.error.details[0].context.key === 'email') { %>
-                            <small class="text-warning"><%= validate.inputValidation.error.details[0].message; %>
-                            </small>
-                            <% } %>
+                            <small class="text-warning"><% if (validate && validate.type === "input" && validate.key === "email") { %><%= validate.message %> <% } %></small>
                         </div>
                         <div class="form-group">
                             <div class="input-group input-group-merge input-group-alternative">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                 </div>
-                                <input class="form-control" name="password" placeholder="Password" type="password"
-                                    value="<% if (Object.keys(validate).length != 0 && validate.inputValidation){%><%= validate.inputValidation.value.password; %><% } %>">
+                                <input type="password" class="form-control" name="password" placeholder="Password"
+                                    value="<% if (validate && validate.type === "input" && validate.key === "email") { %><%= validate.value.password %><% } %>">
                             </div>
-                            <% if (Object.keys(validate).length != 0 && validate.inputValidation && validate.inputValidation.error != null && validate.inputValidation.error.details[0].context.key === 'password') { %>
-                            <small class="text-warning"><%= validate.inputValidation.error.details[0].message; %>
-                            </small>
-                            <% } %>
+                            <small class="text-warning"><% if (validate && validate.type === "input" && validate.key === "password") { %><%= validate.message %> <% } %></small>
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mt-4">Create account</button>

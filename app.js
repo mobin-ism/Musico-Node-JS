@@ -1,7 +1,10 @@
-const web = require('./routes/frontend/web');
+// ROUTE HANDLERS
+const webRoute = require('./routes/frontend/web');
+const backendRoute = require('./routes/backend/web');
+const authRoute = require('./routes/backend/auth');
 const pageNotFound = require('./middlewares/404');
+
 const server = require('./helpers/server');
-const commonRoute = require('./routes/backend/common');
 const db = require('./helpers/db');
 const jwt = require('./helpers/jwt');
 const expressSession = require('express-session');
@@ -21,8 +24,9 @@ app.use(express.static('media'));
 app.use(express.urlencoded({extended : false}));
 app.set('view engine', 'ejs');
 app.set('views', 'views');
-app.use(web);
-app.use(commonRoute);
+app.use(webRoute);
+app.use(authRoute);
+app.use(backendRoute);
 app.use(pageNotFound);
 
 
