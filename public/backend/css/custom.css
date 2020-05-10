@@ -1,3 +1,7 @@
 table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.dataTable tbody td.selected a {
     color: #232627;
 }
+/* table.dataTable tbody tr.selected a, table.dataTable tbody th.selected a, table.dataTable td img {
+    height: 50px;
+    width: 50px;
+} */

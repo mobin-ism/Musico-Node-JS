@@ -10,7 +10,7 @@ class Dashboard {
     index() {
         this.res.render('backend/index', {
             userType : this.req.user.type,
-            pageName: "dashboard",
+            pageName: "dashboard/index",
             pageTitle: "Dashboard"
         });
     }

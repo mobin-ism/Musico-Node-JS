@@ -1,3 +1,7 @@
+const ArtistModel = require('../../models/Artist');
+const ValidationHandler = require('../../helpers/ValidationHandler');
+var validationResult = null;
+
 class Artist {
 
     constructor(req, res) {
@@ -7,21 +11,48 @@ class Artist {
         this.res.locals.userdata = this.req.user;
     }
 
-    index() {
+    async index() {
+        validationResult = null;
+        try {
+            const artistModel = new ArtistModel(this.req, this.res);
+            const artists = await artistModel.getArtists();
+            this.res.render('backend/index', {
+                userType : this.req.user.type,
+                pageName: "artist/index",
+                pageTitle: "Artist",
+                artists : artists
+            });
+        } catch (error) {
+            console.error("Error Occured: ", error.message);
+        }
+    }
+
+    create() {
         this.res.render('backend/index', {
             userType : this.req.user.type,
-            pageName: "artist",
-            pageTitle: "Artist"
+            pageName: "artist/create",
+            pageTitle: "Add Artist",
+            validate : validationResult
         });
     }
 
-    add() {
-        console.log("I am here");
-        this.res.render('backend/index', {
-            userType : this.req.user.type,
-            pageName: "add_artist",
-            pageTitle: "Add Artist"
-        });
+    async store() {
+        const artistModel = new ArtistModel(this.req, this.res);
+        const inputValidationResult = artistModel.validate(this.req.body);
+
+        if (inputValidationResult.error != null) {
+            console.log(inputValidationResult.error);
+            const validationHandler = new ValidationHandler(this.req, this.res);
+            validationResult = validationHandler.setInputValidation(inputValidationResult);
+        } 
+        else {
+            try {
+                validationResult = await artistModel.addArtist(this.req.body);
+            } catch (error) {
+                console.log("Artist Adding Denied: ", error.message);
+            }
+        }
+        this.res.redirect('/artist/create');
     }
 }
 

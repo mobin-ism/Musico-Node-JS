@@ -1,8 +1,11 @@
 const express = require('express');
-const router = express.Router({strict: true});
+const router = express.Router();
 const auth = require('../../middlewares/auth');
 const Dashboard = require('../../controllers/backend/Dashboard');
 const Artist = require('../../controllers/backend/Artist');
+const multer  = require('multer');
+var path = require('path');
+
     
 router.get("/dashboard", auth, function(req, res) {
     const dashboard = new Dashboard(req, res);
@@ -14,9 +17,33 @@ router.get("/artist", auth, function(req, res) {
     artist.index();
 });
 
-router.get("/artist/add", auth, function(req, res) {
+router.get("/artist/create", auth, function(req, res) {
     const artist = new Artist(req, res);
-    artist.add();
+    artist.create();
+});
+
+function randomString(length) {
+    const chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var result = '';
+    for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+}
+
+const storateForArtistImage = multer.diskStorage({
+    destination : function(req, file, callback){
+        callback(null, 'media/artist/');
+    },
+    filename : function(req, file, callback) {
+        file.customName = randomString(20)+path.extname(file.originalname);
+        callback(null, file.customName);
+    }
+});
+const uploadArtistImage = multer({ storage : storateForArtistImage });
+router.post("/artist/store",[uploadArtistImage.single('image_artist'), auth], function(req, res) {
+    req.body.image = req.file.customName;
+    console.log(req.body);
+    const artist = new Artist(req, res);
+    artist.store();
 });
 
 module.exports = router;
