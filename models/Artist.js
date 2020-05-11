@@ -33,9 +33,15 @@ class Artist {
         }
     }
 
+    // GET ALL THE ARTISTS
     async getArtists() {
         const artists = await MongooseArtistModel.find();
         return _.map(artists, _.partialRight(_.pick, ['_id', 'name', 'about', 'image']));
+    }
+
+    //DELETE ARTIST
+    async deleteArtist(id) {
+        await MongooseArtistModel.findOneAndRemove(id);
     }
 }
 

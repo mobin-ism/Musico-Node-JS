@@ -1,6 +1,5 @@
 const User = require('../../models/User');
 const ValidationHandler = require('../../helpers/ValidationHandler');
-
 var validationResult = null;
 
 class AuthController {

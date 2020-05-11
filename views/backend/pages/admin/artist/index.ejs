@@ -55,7 +55,7 @@
                             <% artists.forEach(artist => { %>
                                 <tr>
                                     <td class="table-user"><img src="/artist/<%= artist.image %>" alt="" class="avatar rounded-circle mr-3"></td>
-                                    <td><%= artist.name %> </td>
+                                    <td><%= artist.name %></td>
                                     <td><%= artist.about.length > 50 ? `${artist.about.substring(0, 50)}...` : artist.about %> </td>
                                     <td class="text-center">
                                         <div class="dropdown">
@@ -64,9 +64,8 @@
                                                 <i class="fas fa-ellipsis-v"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
+                                                <a class="dropdown-item" href="">Edit</a>
+                                                <a class="dropdown-item" href="javascript:void(0)" data-id = "<%= artist._id %> " onclick="confirm_modal('/artist/delete', this)">Delete</a>
                                             </div>
                                         </div>
                                     </td>

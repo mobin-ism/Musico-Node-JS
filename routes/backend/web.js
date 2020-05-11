@@ -41,9 +41,13 @@ const storateForArtistImage = multer.diskStorage({
 const uploadArtistImage = multer({ storage : storateForArtistImage });
 router.post("/artist/store",[uploadArtistImage.single('image_artist'), auth], function(req, res) {
     req.body.image = req.file.customName;
-    console.log(req.body);
     const artist = new Artist(req, res);
     artist.store();
+});
+
+router.delete("/artist/delete", auth, function(req, res) {
+    const artist = new Artist(req, res);
+    artist.delete();
 });
 
 module.exports = router;

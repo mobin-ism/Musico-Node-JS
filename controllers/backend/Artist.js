@@ -54,6 +54,16 @@ class Artist {
         }
         this.res.redirect('/artist/create');
     }
+
+    async delete() {
+        const artistModel = new ArtistModel(this.req, this.res);
+        try {
+            await artistModel.deleteArtist(this.req.body.id);   
+        } catch (error) {
+            console.log("Artist Deleting Denied: ", error.message);
+        }
+        this.res.redirect('/artist');
+    }
 }
 
 module.exports = Artist;
