@@ -40,9 +40,21 @@ const storateForArtistImage = multer.diskStorage({
 });
 const uploadArtistImage = multer({ storage : storateForArtistImage });
 router.post("/artist/store",[uploadArtistImage.single('image_artist'), auth], function(req, res) {
+    console.log(req.body);
     req.body.image = req.file.customName;
     const artist = new Artist(req, res);
     artist.store();
+});
+
+router.get("/artist/edit/:id", auth, function(req, res) {
+    const artist = new Artist(req, res);
+    artist.edit();
+});
+
+
+router.put("/artist/update/:id", auth, function(req, res) {    
+    const artist = new Artist(req, res);
+    artist.update();
 });
 
 router.delete("/artist/delete", auth, function(req, res) {

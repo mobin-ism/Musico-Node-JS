@@ -55,6 +55,41 @@ class Artist {
         this.res.redirect('/artist/create');
     }
 
+    async edit() {
+        const artistId = this.req.params.id;
+        try {
+            const artistModel = new ArtistModel(this.req, this.res);
+            const artist = await artistModel.getArtistById(artistId);
+            this.res.render('backend/index', {
+                userType : this.req.user.type,
+                pageName: "artist/edit",
+                pageTitle: "Edit Artist",
+                validate : validationResult,
+                artist : artist
+            });
+        } catch (error) {
+            console.log("An error occured: ", error.message);
+        }
+    }
+
+    async update(){
+        const artistModel = new ArtistModel(this.req, this.res);
+        const inputValidationResult = artistModel.validate(this.req.body);
+
+        if (inputValidationResult.error != null) {
+            const validationHandler = new ValidationHandler(this.req, this.res);
+            validationResult = validationHandler.setInputValidation(inputValidationResult);
+        } 
+        else {
+            try {
+                validationResult = await artistModel.updateArtist(this.req.params.id);
+            } catch (error) {
+                console.log("Artist Updating Denied: ", error.message);
+            }
+        }
+        this.res.redirect('/artist/edit/'+this.req.params.id);
+    }
+
     async delete() {
         const artistModel = new ArtistModel(this.req, this.res);
         try {

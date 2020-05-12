@@ -15,7 +15,7 @@ class Artist {
         const schema = Joi.object().keys({
             name: Joi.string().min(3).max(30).required(),
             about: Joi.string().required().min(30).max(500),
-            image: Joi.string().required()
+            image: Joi.string()
         });
 
         return Joi.validate(data, schema);
@@ -39,6 +39,28 @@ class Artist {
         return _.map(artists, _.partialRight(_.pick, ['_id', 'name', 'about', 'image']));
     }
 
+    // GET ALL THE ARTISTS
+    async getArtistById(id) {
+        const artist = await MongooseArtistModel.findOne({ _id: id });
+        return artist;
+    }
+
+
+    // UPDATING AN ARTIST
+    async updateArtist(id) {
+        const validationHandler = new ValidationHandler(this.request, this.response);
+        try {
+            await MongooseArtistModel.update({_id : id}, {
+                $set : {
+                    name : this.request.body.name,
+                    about : this.request.body.about 
+                }
+            });
+            return validationHandler.setBasicValidation(false, this.request.body.name + " Updated successfully.");
+        } catch (error) {
+            return validationHandler.setDatabaseValidation(true, error.message);
+        }
+    }
     //DELETE ARTIST
     async deleteArtist(id) {
         await MongooseArtistModel.findOneAndRemove(id);

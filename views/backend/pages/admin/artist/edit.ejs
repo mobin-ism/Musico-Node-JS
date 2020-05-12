@@ -1,1 +1,90 @@
-edit
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0"><%= pageTitle %> </h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><%= pageTitle %></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="/artist" class="btn btn-sm btn-neutral">Back to Artist </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <h3 class="mb-0">Update Artist</h3>
+                    <p class="text-sm mb-0">
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt nostrum nemo natus provident
+                        necessitatibus quis consectetur porro rerum commodi in, nam doloribus a nulla consequatur ad
+                        architecto molestiae sapiente dolore.
+                    </p>
+                    <p>
+                        <% if (validate && validate.type === "basic") { %>
+                        <% if(!validate.isError){ %>
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <span class="alert-text">
+                                <strong>Congratulations!</strong>
+                                <%= validate.message %>
+                                !</span>
+                        </div>
+                        <% } else{ %>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span class="alert-text"><strong>Oops!</strong> <%= validate.message %> !</span>
+                        </div>
+                        <% } %>
+                        <% } %>
+                    </p>
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                    <form action="/artist/update/<%= artist._id %>?_method=PUT" method="POST">
+                        <div class="form-group row">
+                            <label for="artist-name" class="col-md-2 col-form-label form-control-label">Artist
+                                Name</label>
+                            <div class="col-md-10">
+                                <input class="form-control" name="name" type="text" id="artist-name"
+                                    value="<% if(validate && validate.type === "input"){ %><%= validate.value.name; %><% } else { %><%= artist.name; %><% } %>">
+                                <small
+                                    class="text-warning"><% if (validate && validate.type === "input" && validate.key === "name") { %><%= validate.message %>
+                                    <% } %></small>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label form-control-label" for="about-artist">About
+                                Artist</label>
+                            <div class="col-md-10">
+                                <textarea class="form-control" name="about" id="about-artist" rows="3"
+                                    style="margin-top: 0px; margin-bottom: 0px; height: 144px;"><% if(validate && validate.type === "input"){ %><%= validate.value.about; %><% } else { %><%= artist.about; %><% } %></textarea>
+                                <small
+                                    class="text-warning"><% if (validate && validate.type === "input" && validate.key === "about") { %><%= validate.message %>
+                                    <% } %></small>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-2">
+                                <button class="btn btn-primary btn-block" type="submit">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <%- include('../../../partials/footer.ejs'); -%>
+</div>
