@@ -30,21 +30,24 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "artist/index" || pageName === "artist/create" || pageName === "artist/edit") { %>active<% } %>" href="/artist">
+              <a class="nav-link <% if (pageName === "artist/index" || pageName === "artist/create" || pageName === "artist/edit") { %>active<% } %>"
+                href="/artist">
                 <i class="ni ni-ungroup text-orange"></i>
                 <span class="nav-link-text">Artist</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "album/index") { %>active<% } %>" href="/album">
+              <a class="nav-link <% if (pageName === "album/index" || pageName === "album/create" || pageName === "album/edit") { %>active<% } %>"
+                href="/album">
                 <i class="ni ni-ui-04 text-info"></i>
                 <span class="nav-link-text">Album</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "track/index") { %>active<% } %>" href="/track">
+              <a class="nav-link <% if (pageName === "track/index" || pageName === "track/create" || pageName === "track/edit") { %>active<% } %>"
+                href="/track">
                 <i class="ni ni-single-copy-04 text-pink"></i>
                 <span class="nav-link-text">Track</span>
               </a>

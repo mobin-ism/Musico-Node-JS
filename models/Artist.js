@@ -2,7 +2,7 @@ const Joi = require('joi');
 const _ = require('lodash');
 const MongooseArtistModel = require('../mongoose/artist');
 const ValidationHandler = require('../helpers/ValidationHandler');
-
+const mongoose = require('mongoose');
 class Artist {
     // CONSTRUCTOR IS TAKING TWO PARAMETERS: REQUEST AND RESPONSE. WHICH WILL BE USED FOR SESSION AND OTHER STUFFS.
     constructor(request, response) {
@@ -50,7 +50,7 @@ class Artist {
     async updateArtist(id) {
         const validationHandler = new ValidationHandler(this.request, this.response);
         try {
-            await MongooseArtistModel.update({_id : id}, {
+            await MongooseArtistModel.update({_id : mongoose.Types.ObjectId(id)}, {
                 $set : {
                     name : this.request.body.name,
                     about : this.request.body.about 
@@ -63,7 +63,7 @@ class Artist {
     }
     //DELETE ARTIST
     async deleteArtist(id) {
-        await MongooseArtistModel.findOneAndRemove(id);
+        await MongooseArtistModel.findOneAndRemove({_id : mongoose.Types.ObjectId(id)});
     }
 }
 

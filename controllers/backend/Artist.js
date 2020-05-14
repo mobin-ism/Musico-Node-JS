@@ -56,10 +56,10 @@ class Artist {
     }
 
     async edit() {
-        const artistId = this.req.params.id;
+        const artist_id = this.req.params.id;
         try {
             const artistModel = new ArtistModel(this.req, this.res);
-            const artist = await artistModel.getArtistById(artistId);
+            const artist = await artistModel.getArtistById(artist_id);
             this.res.render('backend/index', {
                 userType : this.req.user.type,
                 pageName: "artist/edit",

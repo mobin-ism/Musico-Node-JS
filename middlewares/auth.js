@@ -19,11 +19,5 @@ module.exports = function (req, res, next) {
             req.user.type = "user";
         }
         next();
-    } else {
-        res.status(404).render('frontend/index', {
-            pageName: "404",
-            pageTitle: "Oopps!"
-        });
     }
-    
 }

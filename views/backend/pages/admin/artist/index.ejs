@@ -27,7 +27,7 @@
             <div class="card">
                 <!-- Card header -->
                 <div class="card-header">
-                    <h3 class="mb-0">Datatable</h3>
+                    <h3 class="mb-0">Artist List</h3>
                     <p class="text-sm mb-0">
                         This is an exmaple of datatable using the well known datatables.net plugin. This is a minimal
                         setup in order to get started fast.
@@ -65,7 +65,7 @@
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
                                                 <a class="dropdown-item" href="/artist/edit/<%= artist._id %>">Edit</a>
-                                                <a class="dropdown-item" href="javascript:void(0)" data-id = "<%= artist._id %> " onclick="confirm_modal('/artist/delete', this)">Delete</a>
+                                                <a class="dropdown-item" href="javascript:void(0)" data-id = "<%= artist._id %>" onclick="confirm_modal('/artist/delete', this)">Delete</a>
                                             </div>
                                         </div>
                                     </td>

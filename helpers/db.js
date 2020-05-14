@@ -8,3 +8,5 @@ module.exports.connect = async function connect() {
         console.log("Database connection failed due to: ", error.message);
     }
 }
+
+module.exports.mongoose = mongoose;
