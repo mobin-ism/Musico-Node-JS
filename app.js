@@ -5,6 +5,9 @@ const authRoute = require('./routes/backend/auth');
 const artistRoute = require('./routes/backend/artist');
 const albumRoute = require('./routes/backend/album');
 const trackRoute = require('./routes/backend/track');
+const userRoute = require('./routes/backend/user');
+const galleryRoute = require('./routes/backend/gallery');
+const settingsRoute = require('./routes/backend/settings');
 const pageNotFound = require('./middlewares/404');
 
 const server = require('./helpers/server');
@@ -13,6 +16,7 @@ const jwt = require('./helpers/jwt');
 const expressSession = require('express-session');
 const MongoStore = require('connect-mongo')(expressSession);
 const methodOverride = require('method-override')
+const authorization = require('./middlewares/authorization');
 const express = require('express');
 const app = express();
 
@@ -47,6 +51,9 @@ app.use(backendRoute);
 app.use('/artist', artistRoute);
 app.use('/album', albumRoute);
 app.use('/track', trackRoute);
+app.use('/user', authorization, userRoute);
+app.use('/gallery', authorization, galleryRoute);
+app.use('/settings', authorization, settingsRoute);
 app.use(pageNotFound);
 
 

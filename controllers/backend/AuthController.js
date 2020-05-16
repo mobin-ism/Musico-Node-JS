@@ -7,8 +7,9 @@ class AuthController {
     // FOR REGISTERING USER
     async postRegistration(req, res) {
         const userModel = new User(req, res);
-        const inputValidationResult = userModel.validateOnRegistration(req.body);
-
+        // DEFINING A PLACEHOLDER IMAGE FOR USER
+        req.body.image = "placeholder.png";
+        const inputValidationResult = userModel.validate(req.body);
         if (inputValidationResult.error != null) {
             const validationHandler = new ValidationHandler(req, res);
             validationResult = validationHandler.setInputValidation(inputValidationResult);

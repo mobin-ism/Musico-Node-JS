@@ -1,0 +1,36 @@
+    <!-- bradcam_area  -->
+    <div class="bradcam_area breadcam_bg_2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>All Artist</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+    <!-- about_area  -->
+    <div class="about_area">
+        <div class="container">
+            <div class="row align-items-center">
+                <% artists.forEach(artist => { %>
+                <div class="col-xl-5 col-md-6">
+                    <div class="about_thumb">
+                        <img class="img-fluid" src="artist/<%= artist.image %> " alt="">
+                    </div>
+                </div>
+                <div class="col-xl-7 col-md-6">
+                    <div class="about_info">
+                        <h3><%= artist.name %> </h3>
+                        <p>
+                            <%= artist.about %>
+                        </p>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <!--/ about_area  -->

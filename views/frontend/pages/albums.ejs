@@ -1,0 +1,43 @@
+    <!-- bradcam_area  -->
+    <div class="bradcam_area breadcam_bg_2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text text-center">
+                        <h3>All Albums</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <!-- youtube_video_area  -->
+    <div class="youtube_video_area m-1">
+        <div class="container-fluid p-0">
+            <div class="row no-gutters">
+                <% albums.forEach(album => { %>
+                <div class="col-xl-3 col-lg-3 col-md-6">
+                    <div class="single_video">
+                        <div class="thumb">
+                            <img src="album/<%= album.image %> " alt="">
+                        </div>
+                        <div class="hover_elements">
+                            <div class="video">
+                                <a class="popup-video" href="https://www.youtube.com/watch?v=tsBy6je8KjM">
+                                    <i class="fa fa-play"></i>
+                                </a>
+                            </div>
+
+                            <div class="hover_inner">
+                                <span><%= album.created_at.getDate()+" "+album.created_at.toLocaleString('default', { month: 'long' })+", "+album.created_at.getFullYear() %></span>
+                                <h3><a href="#"><%= album.title %> </a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            </div>
+        </div>
+    </div>
+    <!-- / youtube_video_area  -->

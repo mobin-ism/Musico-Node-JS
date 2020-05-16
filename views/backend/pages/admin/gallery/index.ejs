@@ -1,0 +1,61 @@
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0"><%= pageTitle %> </h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="/dashboard"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><%= pageTitle %></li>
+                        </ol>
+                    </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="/gallery/create" class="btn btn-sm btn-neutral">Add New Gallery Image</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <!-- Card header -->
+                <div class="card-header">
+                    <h3 class="mb-0">Gallery Images</h3>
+                    <p class="text-sm mb-0">
+                        This is an exmaple of datatable using the well known datatables.net plugin. This is a minimal
+                        setup in order to get started fast.
+                    </p>
+                </div>
+                <!-- CARD BODY -->
+                <div class="row justify-content-center mt-2">
+                    <% galleryImages.forEach(galleryImage => { %>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <!-- Card image -->
+                                <% if (!galleryImage.image) { %>
+                                    <img class="card-img-top" src="/gallery/placeholder.png" alt="Image placeholder">
+                                <% } else { %>
+                                    <img class="card-img-top" src="/gallery/<%= galleryImage.image %>" alt="Image placeholder">
+                                <% } %> 
+                                <!-- Card body -->
+                                <div class="card-body text-center">
+                                    <strong>Title: </strong> <span><%= galleryImage.title %> </span><br><br>
+                                  <a class="btn btn-danger btn-sm" href="javascript:void(0)" data-id = "<%= galleryImage._id %>" onclick="confirm_modal('/gallery/delete', this)">Delete</a>
+                                </div>
+                              </div>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <%- include('../../../partials/footer.ejs'); -%>
+</div>

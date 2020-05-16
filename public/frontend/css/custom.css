@@ -1,0 +1,13 @@
+.album-art {
+    height: 148px;
+    width: 148px;
+}
+
+.gallery_area .single-gallery .gallery_hover a {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    color: #fff;
+    font-size: 27px;
+}

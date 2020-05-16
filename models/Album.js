@@ -15,7 +15,7 @@ class Album {
     validate(data) {
         const schema = Joi.object().keys({
             title: Joi.string().min(3).max(30).required(),
-            artist : Joi.objectId(),
+            artist: Joi.objectId(),
             image: Joi.string()
         });
 
@@ -37,12 +37,20 @@ class Album {
     // GET ALL THE ALBUMS
     async getAlbums() {
         const albums = await MongooseAlbumModel.find().populate('artist');
-        return _.map(albums, _.partialRight(_.pick, ['_id', 'title', 'artist', 'image']));
+        return _.map(albums, _.partialRight(_.pick, ['_id', 'title', 'artist', 'image', 'created_at']));
+    }
+
+    // GET ALL THE ALBUMS
+    async getLatestAlbums() {
+        const albums = await MongooseAlbumModel.find().populate('artist').limit(4);
+        return _.map(albums, _.partialRight(_.pick, ['_id', 'title', 'artist', 'image', 'created_at']));
     }
 
     // GET ALL THE ALBUMS
     async getAlbumById(id) {
-        const album = await MongooseAlbumModel.findOne({ _id: id });
+        const album = await MongooseAlbumModel.findOne({
+            _id: id
+        });
         return album;
     }
 
@@ -50,10 +58,12 @@ class Album {
     async updateAlbum(id) {
         const validationHandler = new ValidationHandler(this.request, this.response);
         try {
-            await MongooseAlbumModel.update({_id : mongoose.Types.ObjectId(id)}, {
-                $set : {
-                    title : this.request.body.title,
-                    artist : this.request.body.artist 
+            await MongooseAlbumModel.update({
+                _id: mongoose.Types.ObjectId(id)
+            }, {
+                $set: {
+                    title: this.request.body.title,
+                    artist: this.request.body.artist
                 }
             });
             return validationHandler.setBasicValidation(false, this.request.body.title + " Updated successfully.");
@@ -64,7 +74,9 @@ class Album {
 
     //DELETE ALBUM
     async deleteAlbum(id) {
-        await MongooseAlbumModel.findOneAndRemove({_id : mongoose.Types.ObjectId(id)});
+        await MongooseAlbumModel.findOneAndRemove({
+            _id: mongoose.Types.ObjectId(id)
+        });
     }
 }
 

@@ -1,5 +1,4 @@
 const TrackModel = require('../../models/Track');
-const ArtistModel = require('../../models/Artist');
 const AlbumModel = require('../../models/Album');
 const ValidationHandler = require('../../helpers/ValidationHandler');
 var validationResult = null;
@@ -64,10 +63,8 @@ class Track {
 
     async edit() {
         const trackId = this.req.params.id;
-        const artistModel = new ArtistModel(this.req, this.res);
-        const artists = await artistModel.getArtists();
         const albumModel = new AlbumModel(this.req, this.res);
-        const albums = await albumModel.getalbums();
+        const albums = await albumModel.getAlbums();
 
         try {
             const trackModel = new TrackModel(this.req, this.res);
@@ -78,7 +75,6 @@ class Track {
                 pageTitle: "Edit Track",
                 validate : validationResult,
                 track : track,
-                artists : artists,
                 albums : albums
             });
         } catch (error) {

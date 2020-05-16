@@ -54,14 +54,14 @@
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "user/index") { %>active<% } %>" href="/user">
+              <a class="nav-link <% if (pageName === "user/index" || pageName === "user/create" || pageName === "user/edit") { %>active<% } %>" href="/user">
                 <i class="ni ni-align-left-2 text-default"></i>
                 <span class="nav-link-text">User</span>
               </a>
             </li>
 
             <li class="nav-item">
-              <a class="nav-link <% if (pageName === "gallery/index") { %>active<% } %>" href="/gallery">
+              <a class="nav-link <% if (pageName === "gallery/index" || pageName === "gallery/create") { %>active<% } %>" href="/gallery">
                 <i class="ni ni-map-big text-primary"></i>
                 <span class="nav-link-text">Gallery</span>
               </a>
